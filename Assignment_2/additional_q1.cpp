@@ -4,8 +4,8 @@ using namespace std;
 int sol(int arr[],int size,int k){
 	int count=0;
 	for(int i=0;i<size;i++){
-		for(int j=0;j<size;j++){
-			if(arr[i] - arr[j] == k) count++;
+		for(int j=i+1;j<size;j++){
+			if( abs(arr[i] - arr[j]|) == k) count++;
 		}
 	}
 	return count;
@@ -16,4 +16,5 @@ int main(){
 	int n = sizeof(arr)/sizeof(arr[0]);
 	int k = 3;
 	cout<<sol(arr,n,k);
+
 }
