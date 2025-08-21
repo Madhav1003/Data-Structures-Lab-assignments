@@ -8,11 +8,11 @@ void sol(int arr[],int n){
 			swap(arr[i],arr[j]);{
 			i++;j++;}
 		}
-		else if(arr[j==2]){
+		else if(arr[j]==2){
 			swap(arr[j],arr[k]);
-			j++;k--;
+			k--;
 		}
-		else k--;
+		else j++;
 	}
 }
 
@@ -28,4 +28,5 @@ int main(){
 	sol(arr,5);
 	print(arr,5);
 	
+
 }
