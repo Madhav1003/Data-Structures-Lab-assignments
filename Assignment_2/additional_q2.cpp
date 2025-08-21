@@ -16,7 +16,8 @@ bool sol(string str){
 
 int main(){
 
-    string str = "abcd";
+    string str = "abcabab";
     cout<<sol(str);
+
 
 }
