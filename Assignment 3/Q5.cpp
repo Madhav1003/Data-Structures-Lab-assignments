@@ -7,12 +7,7 @@ int evaluatePostfix(string expr) {
     stack<int> st;
 
     for (int i = 0; i < expr.length(); i++) {
-        char ch = expr[i];
-
-       
-        if (ch == ' ') continue;
-
-        
+        char ch = expr[i];        
         if (isdigit(ch)) {
             st.push(ch - '0');   
         }
