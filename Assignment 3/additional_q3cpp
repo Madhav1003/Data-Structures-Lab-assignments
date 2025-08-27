@@ -7,26 +7,20 @@ void printNGE(int arr[], int n) {
     int stack[MAX];
     int top = -1;
 
-    int nge[MAX];  // to store next greater elements
+    int nge[MAX]; 
 
-    // initialize all nge values to -1
     for (int i = 0; i < n; i++) {
         nge[i] = -1;
     }
 
     for (int i = 0; i < n; i++) {
-        // While stack is not empty and current element is greater than element at top of stack
+       
         while (top != -1 && arr[i] > arr[stack[top]]) {
             nge[stack[top]] = arr[i];
             top--;
         }
-        // push current index to stack
         stack[++top] = i;
     }
-
-    // Elements remaining in stack have no next greater element, nge is already -1 for them
-
-    // Print the results
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " --> " << nge[i] << endl;
     }
