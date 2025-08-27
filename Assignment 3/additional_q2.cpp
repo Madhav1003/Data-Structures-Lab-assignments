@@ -1,70 +1,56 @@
 #include <iostream>
-#define MAX 100
 using namespace std;
 
+#define MAX 5
 int stack[MAX];
 int top = -1;
-int minElement;
 
-void push(int x) {
-    if (top == MAX - 1) {
-        cout << "Overflow\n";
+bool isEmpty() {
+    return (top == -1);
+}
+
+bool isFull() {
+    return (top == MAX - 1);
+}
+
+void push(int val) {
+    if (isFull()) {
+        cout << "Stack Overflow\n";
         return;
     }
-    if (top == -1) {
-        stack[++top] = x;
-        minElement = x;
-    } 
-    else if (x >= minElement) {
-        stack[++top] = x;
-    } 
-    else {
-        stack[++top] = 2 * x - minElement;
-        minElement = x;
-    }
+    stack[++top] = val;
+    cout << val << " pushed to stack.\n";
 }
 
 void pop() {
-    if (top == -1) {
-        cout << "Underflow\n";
+    if (isEmpty()) {
+        cout << "Stack Underflow\n";
         return;
     }
-    int t = stack[top--];
-    if (t < minElement) {
-        cout << "Popped: " << minElement << "\n";
-        minElement = 2 * minElement - t;
-    } 
-    else {
-        cout << "Popped: " << t << "\n";
-    }
+    cout << stack[top--] << " popped from stack.\n";
 }
 
-int getMin() {
-    if (top == -1) {
-        cout << "Stack empty\n";
-        return -1;
+int getmin() {
+    if (isEmpty()) {
+        cout << "Stack Underflow\n";
+        return -1;  
     }
-    return minElement;
-}
 
-int peek() {
-    if (top == -1) return -1;
-    int t = stack[top];
-    if (t < minElement) return minElement;
-    return t;
+    int minVal = stack[0];
+    for (int i = 1; i <= top; i++) {
+        if (stack[i] < minVal) {
+            minVal = stack[i];
+        }
+    }
+    return minVal;
 }
 
 int main() {
-    push(3);
+    push(10);
+    push(20);
     push(5);
-    cout << "Min: " << getMin() << "\n";
-    push(2);
-    push(1);
-    cout << "Min: " << getMin() << "\n";
-    pop();
-    cout << "Min: " << getMin() << "\n";
-    pop();
-    cout << "Top: " << peek() << "\n";
-    cout << "Min: " << getMin() << "\n";
-    return 0;
+    push(15);
+
+    cout << "Minimum element: " << getmin() << endl;
+    
 }
