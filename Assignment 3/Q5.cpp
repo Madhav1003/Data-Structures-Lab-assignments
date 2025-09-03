@@ -12,6 +12,11 @@ int evaluatePostfix(string expr) {
             st.push(ch - '0');   
         }
         else {
+
+             if (st.size() < 2) {
+                cerr << "insufficient values" << endl;
+                return -1;
+            }
             
             int val2 = st.top(); st.pop();
             int val1 = st.top(); st.pop();
