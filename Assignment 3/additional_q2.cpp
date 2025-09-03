@@ -1,25 +1,35 @@
 #include <iostream>
 using namespace std;
 
-#define MAX 5
-int stack[MAX];
+#define MAX 100
+int st[MAX];
 int top = -1;
+int minElement;
 
 bool isEmpty() {
-    return (top == -1);
+    return top == -1;
 }
 
 bool isFull() {
-    return (top == MAX - 1);
+    return top == MAX - 1;
 }
 
-void push(int val) {
+void push(int x) {
     if (isFull()) {
         cout << "Stack Overflow\n";
         return;
     }
-    stack[++top] = val;
-    cout << val << " pushed to stack.\n";
+    if (isEmpty()) {
+        st[++top] = x;
+        minElement = x;
+    } 
+    else if (x >= minElement) {
+        st[++top] = x;
+    } 
+    else {
+        st[++top] = 2 * x - minElement;
+        minElement = x;
+    }
 }
 
 void pop() {
@@ -27,30 +37,40 @@ void pop() {
         cout << "Stack Underflow\n";
         return;
     }
-    cout << stack[top--] << " popped from stack.\n";
+    int t = st[top--];
+    if (t < minElement) {
+        minElement = 2 * minElement - t;
+    }
 }
 
-int getmin() {
+int peek() {
     if (isEmpty()) {
-        cout << "Stack Underflow\n";
-        return -1;  
+        cout << "Stack is empty\n";
+        return -1;
     }
+    int t = st[top];
+    return (t >= minElement) ? t : minElement;
+}
 
-    int minVal = stack[0];
-    for (int i = 1; i <= top; i++) {
-        if (stack[i] < minVal) {
-            minVal = stack[i];
-        }
+int getMin() {
+    if (isEmpty()) {
+        cout << "Stack is empty\n";
+        return -1;
     }
-    return minVal;
+    return minElement;
 }
 
 int main() {
-    push(10);
-    push(20);
     push(5);
-    push(15);
+    push(3);
+    push(7);
+    push(2);
 
-    cout << "Minimum element: " << getmin() << endl;
-    
+    cout << "Current Min: " << getMin() << endl;
+    pop();
+    cout << "Current Min: " << getMin() << endl;
+    pop();
+    cout << "Top: " << peek() << endl;
+    cout << "Current Min: " << getMin() << endl;
+
 }
