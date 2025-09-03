@@ -1,26 +1,20 @@
 #include <iostream>
-#define MAX 100
-
+#include <stack>
+#include <vector>
 using namespace std;
 
-void printNGE(int arr[], int n) {
-    int stack[MAX];
-    int top = -1;
-
-    int nge[MAX]; 
+void sol(int arr[], int n) {
+    vector<int> nge(n, -1);
+    stack<int> st;
 
     for (int i = 0; i < n; i++) {
-        nge[i] = -1;
-    }
-
-    for (int i = 0; i < n; i++) {
-       
-        while (top != -1 && arr[i] > arr[stack[top]]) {
-            nge[stack[top]] = arr[i];
-            top--;
+        while (!st.empty() && arr[i] > arr[st.top()]) {
+            nge[st.top()] = arr[i];
+            st.pop();
         }
-        stack[++top] = i;
+        st.push(i);
     }
+
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " --> " << nge[i] << endl;
     }
@@ -29,6 +23,8 @@ void printNGE(int arr[], int n) {
 int main() {
     int arr[] = {4, 5, 2, 25};
     int n = sizeof(arr) / sizeof(arr[0]);
-    printNGE(arr, n);
+
+    sol(arr, n);
+
     return 0;
 }
