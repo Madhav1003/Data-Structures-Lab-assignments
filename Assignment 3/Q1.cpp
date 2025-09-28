@@ -1,74 +1,63 @@
 #include <iostream>
 using namespace std;
-#define max 6
 
-int stack[max];
-int top = -1;
+#define MAX 100
 
-bool isempty()
-{
-    if (top == -1)
-        return true;
+class Stack {
+    int top;
+    int arr[MAX];
+
+public:
+    Stack() { top = -1; }
+
+    void push(int x) {
+        if (isFull()) {
+            cout << "Stack Overflow\n";
+            return;
+        }
+        arr[++top] = x;
+        cout << x << " pushed into stack\n";
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            cout << "Stack Underflow\n";
+            return -1;
+        }
+        return arr[top--];
+    }
+
+    int peek() {
+        if (isEmpty()) {
+            cout << "Stack is Empty\n";
+            return -1;
+        }
+        return arr[top];
+    }
+
+    bool isEmpty() {
+        return top == -1;
+    }
+
+    bool isFull() {
+        return top == MAX - 1;
+    }
+};
+
+int main() {
+    Stack s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+
+    cout << "Top element: " << s.peek() << endl;
+
+    cout << "Popped: " << s.pop() << endl;
+    cout << "Popped: " << s.pop() << endl;
+
+    if (s.isEmpty())
+        cout << "Stack is empty\n";
     else
-        return false;
-}
-
-void pop()
-{
-    if (isempty())
-    {
-        cout << "Stack underflow" << endl;
-    }
-    else
-    {
-        cout << stack[top] << " poped" << endl;
-        top--;
-    }
-}
-
-void push(int n)
-{
-        top++;
-        stack[top] = n;
-}
-
-bool isfull(){
-    if(top==max) return true;
-    else return false;
-}
-
-void peek(){
-    cout<<stack[top]<<endl;
-}
-
-void display(){
-    for (int i = 0; i <= top; i++)
-    {
-        cout<<stack[i]<<" ";
-    }
-    cout<<endl;
-}
-
-int main()
-{
-    push(10);
-    push(20);
-    push(30);
-    push(40);
-    push(50);
-    push(60);
-
-    cout<<isempty()<<endl;
-
-    cout<<isfull()<<endl;
-
-    display();
-
-    peek();
-
-    pop();
-
-    display();
-
+        cout << "Stack is not empty\n";
 
 }
