@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 class SinglyLinkedList{
-    Class Node{int data;Node* next;};
+    class Node{int data;Node* next;};
     Node* head;
 public:
     SinglyLinkedList(){head=NULL;}
