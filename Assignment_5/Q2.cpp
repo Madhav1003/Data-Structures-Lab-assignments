@@ -1,14 +1,19 @@
 #include <iostream>
 using namespace std;
-class SinglyLinkedList{
-    class Node{int data;Node* next;};
+class Node{
+public:
+    int data;
+    Node* next;
+    Node(int val){data=val;next=NULL;}
+};
+class LinkedList{
     Node* head;
 public:
-    SinglyLinkedList(){head=NULL;}
+    LinkedList(){head=NULL;}
     void create(int a[],int n){
-        head=new Node{a[0],NULL};
+        head=new Node(a[0]);
         Node* t=head;
-        for(int i=1;i<n;i++){t->next=new Node{a[i],NULL};t=t->next;}
+        for(int i=1;i<n;i++){t->next=new Node(a[i]);t=t->next;}
     }
     void countAndDelete(int key){
         int c=0;
@@ -27,9 +32,8 @@ public:
     }
 };
 int main(){
-    SinglyLinkedList s;
+    LinkedList l;
     int a[]={1,2,1,2,1,3,1};
-    s.create(a,7);
-    s.countAndDelete(1);
+    l.create(a,7);
+    l.countAndDelete(1);
 }
-
