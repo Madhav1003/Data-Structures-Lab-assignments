@@ -1,16 +1,22 @@
 #include <iostream>
 using namespace std;
-class SinglyLinkedList{
-    class Node{int data;Node* next;};
+class Node{
+public:
+    int data;
+    Node* next;
+    Node(int val){data=val;next=NULL;}
+};
+class LinkedList{
     Node* head;
 public:
-    SinglyLinkedList(){head=NULL;}
+    LinkedList(){head=NULL;}
     void insertBeg(int x){
-        Node* n=new Node{x,head};
+        Node* n=new Node(x);
+        n->next=head;
         head=n;
     }
     void insertEnd(int x){
-        Node* n=new Node{x,NULL};
+        Node* n=new Node(x);
         if(!head){head=n;return;}
         Node* t=head;
         while(t->next)t=t->next;
@@ -21,12 +27,12 @@ public:
         if(head->data==val){insertBeg(x);return;}
         Node* t=head;
         while(t->next&&t->next->data!=val)t=t->next;
-        if(t->next){Node* n=new Node{x,t->next};t->next=n;}
+        if(t->next){Node* n=new Node(x);n->next=t->next;t->next=n;}
     }
     void insertAfter(int val,int x){
         Node* t=head;
         while(t&&t->data!=val)t=t->next;
-        if(t){Node* n=new Node{x,t->next};t->next=n;}
+        if(t){Node* n=new Node(x);n->next=t->next;t->next=n;}
     }
     void deleteBeg(){
         if(!head)return;
@@ -50,8 +56,7 @@ public:
         if(t->next){Node* d=t->next;t->next=d->next;delete d;}
     }
     void search(int val){
-        Node* t=head;
-        int pos=1;
+        Node* t=head;int pos=1;
         while(t){if(t->data==val){cout<<"Found at position "<<pos<<endl;return;}t=t->next;pos++;}
         cout<<"Not Found"<<endl;
     }
@@ -62,5 +67,5 @@ public:
     }
 };
 int main(){
-    
+
 }
