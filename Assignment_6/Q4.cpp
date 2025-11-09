@@ -1,19 +1,67 @@
-#include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-class Node{
+class node
+{
 public:
-int d;
-Node* next = NULL;
-Node* prev = NULL;
+    char data;
+    node *next = NULL;
+    node *prev = NULL;
 };
 
-Node* sol(Node* head){
-    if(!head) return head;
-    Node* temp = head;
-    while(temp->next){
-        if(temp->next->prev!=temp) temp->next->prev = temp;
-        temp=temp->next;
+class dll
+{
+    node *head = NULL;
+
+public:
+    void at_head(char x)
+    {
+        node *newn = new node;
+        if (!head)
+        {
+            head = newn;
+            head->data = x;
+            return;
+        }
+        newn->next = head;
+        head->prev = newn;
+        head = newn;
+        newn->data = x;
     }
-    return head;
+    void display()
+    {
+        node *temp = head;
+        while (temp)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+    bool isplaindrome(){
+        if(!head) return false;
+        if(head->next==NULL) return true;
+        node* end=head;
+        while(end->next!=NULL){
+            end=end->next;
+        }
+        node* front =head;
+        while(front!=end){
+            if(tolower(front->data)!=tolower(end->data)) return false;
+            front=front->next;
+            end=end->prev;
+        }
+        return true;
+    }
+};
+int main() {
+
+    dll d1;
+    d1.at_head('L');
+    d1.at_head('E');
+    d1.at_head('V');
+    d1.at_head('E');
+    d1.at_head('l');
+    d1.display();
+    cout<<d1.isplaindrome();
 }
