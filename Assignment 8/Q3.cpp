@@ -14,7 +14,6 @@ int findMin(Node* root) {
 node* deltetion(node* root,int x){
     if(!root) return root;
     if(root->data == x){
-        // if 0 child
         if(!root->left && !root->right){
             delete root;
             return NULL;
