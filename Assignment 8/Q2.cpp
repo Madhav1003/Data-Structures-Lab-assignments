@@ -33,5 +33,34 @@ int findMin(Node* root) {
     return root->data;
 }
 
+node* inorderSuccessor(node* root, node* x) {
+    node* succ = NULL;
 
+    while(root) {
+        if(x->data < root->data) {
+            succ = root;    
+            root = root->left;
+        }
+        else {
+            root = root->right;
+        }
+    }
+    return succ;
+}
 
+node* inorderPredecessor(node* root, node* x) {
+    if(x->left)
+        return findMax(x->left);
+    node* pred = NULL;
+    while(root) {
+        if(x->data > root->data) {
+            pred = root;   
+            root = root->right;
+        }
+        else if(x->data < root->data) {
+            root = root->left;
+        }
+        else break;
+    }
+    return pred;
+}
