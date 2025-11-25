@@ -29,7 +29,7 @@ node* deltetion(node* root,int x){
                 return root->right;
             }
         if(root->left && root->right){
-            int min = findMin(root);
+            int min = findMin(root->right);
             root->right = deltetion(root->right,min);
         }
     }
