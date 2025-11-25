@@ -34,8 +34,9 @@ int findMin(Node* root) {
 }
 
 node* inorderSuccessor(node* root, node* x) {
+    if (x->right) return findMin(x->right);
+    
     node* succ = NULL;
-
     while(root) {
         if(x->data < root->data) {
             succ = root;    
