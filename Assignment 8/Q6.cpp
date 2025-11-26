@@ -47,7 +47,7 @@ public:
 
     int top() {
         if (heap.size() <= 1)
-            throw runtime_error("Priority Queue is empty.");
+           return -1;
         return heap[1];
     }
 
