@@ -36,15 +36,17 @@ void heapifyMin(int arr[], int n, int i) {
 }
 
 void heapSortIncreasing(int arr[], int n) {
-    for (int i = n - 1; i >= 1; i--) {
+    for (int i = n; i > 1; i--) {
         swap(arr[0], arr[i]);  
         heapifyMax(arr, i, 0); 
     }
 }
 
 void heapSortDecreasing(int arr[], int n) {
-    for (int i = n/2 ; i >= 1; i--)
-        heapifyMin(arr, n, i);
+      for (int i = n; i > 1; i--) {
+        swap(arr[0], arr[i]);  
+        heapifyMin(arr, i, 0); 
+    }
 }
 
 
