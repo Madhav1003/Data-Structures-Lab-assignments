@@ -58,10 +58,9 @@ node* inorderPredecessor(node* root, node* x) {
             pred = root;   
             root = root->right;
         }
-        else if(x->data < root->data) {
+        else{
             root = root->left;
         }
-        else break;
     }
     return pred;
 }
