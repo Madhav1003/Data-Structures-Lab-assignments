@@ -14,11 +14,11 @@ Node* search_rec(Node* root, int key) {
 Node* search_itr(Node* root, int key) {
     Node* temp=root;
     while(temp){
-        if(temp->data==x) return true;
+        if(temp->data==x) return root;
        if(temp->data<x) temp=temp->right;
        else temp=temp->left;
     }
-    return false;
+    return NULL;
 }
 
 int findMax(Node* root) {
